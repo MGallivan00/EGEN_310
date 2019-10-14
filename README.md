@@ -1,6 +1,6 @@
-# first_test
+# RC car Controller, built ground up for an inter-disciplinary project with Mechanical Engineers
 
-First Test for RC car Controller
+RC car Controller
 
 ## Getting Started
 
