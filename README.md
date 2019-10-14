@@ -1,6 +1,6 @@
-# RC car Controller, built ground up for an inter-disciplinary project with Mechanical Engineers
+# RC car Controller
 
-RC car Controller
+built ground up for an inter-disciplinary project with Mechanical Engineers
 
 ## Getting Started
 
