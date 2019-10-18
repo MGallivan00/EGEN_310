@@ -5,26 +5,49 @@ import 'package:flutter/widgets.dart';
 class UserInterface extends StatelessWidget {
   MainAxisAlignment _mainAxisAlignment;
   CrossAxisAlignment _crossAxisAlignment;
-  String _buttonName;
-
+  IconData _button;
   String _instruction;
+  bool _buttonPressed = false;
 
-  UserInterface(this._mainAxisAlignment, this._crossAxisAlignment, this._buttonName, this._instruction); // Constructor
+  UserInterface(this._mainAxisAlignment, this._crossAxisAlignment, this._button,
+      this._instruction); // Constructor
   @override
   Widget build(BuildContext context) {
     return Column(
-          mainAxisAlignment: _mainAxisAlignment,
-          crossAxisAlignment: _crossAxisAlignment,
-          children: <Widget>[
-            // Help creating button from source: https://api.flutter.dev/flutter/material/RaisedButton-class.html
-            RaisedButton(
-              splashColor: Colors.deepPurple ,
-            onPressed: () {print(_instruction);},
-              child: Text(_buttonName),
+      mainAxisAlignment: _mainAxisAlignment,
+      crossAxisAlignment: _crossAxisAlignment,
+      children: <Widget>[
+        // Help creating button from source: https://api.flutter.dev/flutter/material/RaisedButton-class.html
+//        IconButton(
+//          icon: Icon(_button),
+//          iconSize: 150.0,
+//          splashColor: Colors.deepPurple,
+//          tooltip: 'Controls the vehicle',
+//          onPressed: () {
+//            buttonAction();
+//          },
 
-            )
+//          child: Text(_buttonName),
+//        ),
+        // Source for listener: https://stackoverflow.com/questions/52128572/flutter-execute-method-so-long-the-button-pressed
+        GestureDetector(
+          child: IconButton(
+            icon: Icon(_button),
+            iconSize: 150.0,
+            splashColor: Colors.deepPurple,
+            tooltip: 'Controls the vehicle',
+            onPressed: () {
+             buttonAction();
+            },
+          ),
 
-          ],
+        ),
+      ],
     );
+  }
+
+  buttonAction() {
+    print(_instruction);
+    print("-----------");
   }
 }

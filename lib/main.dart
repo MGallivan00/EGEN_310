@@ -67,12 +67,10 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            _leftButton = UserInterface(MainAxisAlignment.center, CrossAxisAlignment.end,
-                "Turn Left", "turn Left"),
-            _rightButton = UserInterface(MainAxisAlignment.center, CrossAxisAlignment.end,
-                "Turn Right", "turn Right"),
-
-
+            _leftButton = UserInterface(MainAxisAlignment.center,
+                CrossAxisAlignment.end, Icons.keyboard_arrow_left, "turn Left"),
+            _rightButton = UserInterface(MainAxisAlignment.center,
+                CrossAxisAlignment.end, Icons.keyboard_arrow_right, "turn Right"),
           ]),
 
       // This trailing comma makes auto-formatting nicer for build methods.
