@@ -70,9 +70,10 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             //TODO Thread?
-
             _leftButton = UserInterface(MainAxisAlignment.center, // Create the left button
                 CrossAxisAlignment.end, "turn Left", Icons.keyboard_arrow_left),
+            Text('Turn'),
+
             _rightButton = UserInterface(MainAxisAlignment.center, // Create the turn right button
                 CrossAxisAlignment.end, "turn Right", Icons.keyboard_arrow_right),
           ]),

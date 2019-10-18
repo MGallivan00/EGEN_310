@@ -69,6 +69,7 @@ class _UserInterfaceState extends State<UserInterface> {
             decoration: BoxDecoration(color: Colors.deepPurple),
             padding: EdgeInsets.all(5.0),
             margin: EdgeInsets.all(10.0),
+
             child: Icon(
               // Adds Arrow Icon to button
               _icon,
