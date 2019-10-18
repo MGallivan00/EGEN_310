@@ -86,8 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Icons.keyboard_arrow_right),
 
           Column( // Column for forward / Backward movement
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 //TODO Thread?
                 _forwardButton = UserInterface( // Create the forward button
