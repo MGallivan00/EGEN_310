@@ -61,12 +61,15 @@ class _MyHomePageState extends State<MyHomePage> {
         centerTitle: true,
       ),
       // Following code help with source : https://www.youtube.com/watch?v=pTJJsmejUOQ
-      body: Column(
+      body: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            UserInterface('User Interface'),
-            UserInterface('User Interface 2'),
+            UserInterface(MainAxisAlignment.center, CrossAxisAlignment.end,
+                "Turn Left", "turn Left"),
+            UserInterface(MainAxisAlignment.center, CrossAxisAlignment.end,
+                "Turn Right", "turn Right"),
+
           ]),
       // This trailing comma makes auto-formatting nicer for build methods.
     );
