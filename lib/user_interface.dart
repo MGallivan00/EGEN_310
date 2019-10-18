@@ -35,8 +35,10 @@ class UserInterface extends StatelessWidget {
 //        ),
       FloatingActionButton(
         onPressed: buttonAction,
+        splashColor: Colors.amber,
         child:
           Icon(_button)
+
       )
 
       ],
