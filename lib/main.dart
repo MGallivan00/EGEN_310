@@ -72,9 +72,9 @@ class _MyHomePageState extends State<MyHomePage> {
             //TODO Thread?
 
             _leftButton = UserInterface(MainAxisAlignment.center, // Create the left button
-                CrossAxisAlignment.end, "turn Left"),
+                CrossAxisAlignment.end, "turn Left", Icons.keyboard_arrow_left),
             _rightButton = UserInterface(MainAxisAlignment.center, // Create the turn right button
-                CrossAxisAlignment.end, "turn Right"),
+                CrossAxisAlignment.end, "turn Right", Icons.keyboard_arrow_right),
           ]),
 
       // This trailing comma makes auto-formatting nicer for build methods.

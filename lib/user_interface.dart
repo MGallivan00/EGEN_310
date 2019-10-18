@@ -8,15 +8,17 @@ class UserInterface extends StatefulWidget {
   MainAxisAlignment _mainAxisAlignment;
   CrossAxisAlignment _crossAxisAlignment;
   String _instruction;
+  IconData _icon;
 
   UserInterface(this._mainAxisAlignment, this._crossAxisAlignment,
-      this._instruction); // Constructor for UserInterface
+      this._instruction, this._icon); // Constructor for UserInterface
 
   @override
   _UserInterfaceState createState() => _UserInterfaceState(
       this._mainAxisAlignment,
       this._crossAxisAlignment,
-      this._instruction); // Create instance of _UserInterfaceState
+      this._instruction,
+      this._icon); // Create instance of _UserInterfaceState
 }
 
 // Following code sourced from : https://stackoverflow.com/questions/52128572/flutter-execute-method-so-long-the-button-pressed
@@ -26,9 +28,10 @@ class _UserInterfaceState extends State<UserInterface> {
   CrossAxisAlignment _crossAxisAlignment;
   String _instruction;
   bool _loopActive = false;
+  IconData _icon;
 
   _UserInterfaceState(this._mainAxisAlignment, this._crossAxisAlignment,
-      this._instruction); // Constructor
+      this._instruction, this._icon); // Constructor
 
 // Method to loop while the button is pressed and change the state
   void _controlVehicle() async {
@@ -62,21 +65,29 @@ class _UserInterfaceState extends State<UserInterface> {
             stop(); // Will stop motor value change
           },
           child: Container(
-              // Creates the buttons
-              decoration:
-                  BoxDecoration(color: Colors.deepPurple, border: Border.all()),
-              padding: EdgeInsets.all(25.0),
-              child: Text(_instruction)),
+            // Creates the buttons
+            decoration:
+                BoxDecoration(color: Colors.deepPurple, border: Border.all()),
+            padding: EdgeInsets.all(25.0),
+//              child: Text(_instruction)),
+            child: Icon( // Adds Arrow Icon to button
+              _icon,
+              color: Colors.black87,
+              size: 50.0,
+            ),
+          ),
         )
       ],
     );
   }
 
-  void _changeMotorValue() {  // Method to change the motor value
+  void _changeMotorValue() {
+    // Method to change the motor value
     print(_instruction);
   }
 
-  void stop() { // Method to stop motor values.
+  void stop() {
+    // Method to stop motor values.
     print("stop ");
   }
 }
