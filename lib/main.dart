@@ -68,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       // Following code help with source : https://www.youtube.com/watch?v=pTJJsmejUOQ
       body: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           //TODO Thread?
