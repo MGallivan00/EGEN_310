@@ -7,79 +7,76 @@ import 'package:flutter/widgets.dart';
 class UserInterface extends StatefulWidget {
   MainAxisAlignment _mainAxisAlignment;
   CrossAxisAlignment _crossAxisAlignment;
-  IconData _button;
   String _instruction;
 
-  UserInterface(this._mainAxisAlignment, this._crossAxisAlignment, this._button,
-      this._instruction);
+  UserInterface(this._mainAxisAlignment, this._crossAxisAlignment,
+      this._instruction); // Constructor for UserInterface
 
   @override
   _UserInterfaceState createState() => _UserInterfaceState(
       this._mainAxisAlignment,
       this._crossAxisAlignment,
-      this._button,
-      this._instruction);
+      this._instruction); // Create instance of _UserInterfaceState
 }
 
 // Following code sourced from : https://stackoverflow.com/questions/52128572/flutter-execute-method-so-long-the-button-pressed
 class _UserInterfaceState extends State<UserInterface> {
-  bool _buttonPressed = false;
+  bool _buttonPressed = false; // Boolean if the button is pressed
   MainAxisAlignment _mainAxisAlignment;
   CrossAxisAlignment _crossAxisAlignment;
-  IconData _button;
   String _instruction;
-    bool _loopActive = false;
+  bool _loopActive = false;
 
-  _UserInterfaceState(
-      this._mainAxisAlignment,
-      this._crossAxisAlignment,
-      this._button,
-      this._instruction);
+  _UserInterfaceState(this._mainAxisAlignment, this._crossAxisAlignment,
+      this._instruction); // Constructor
 
-// async to have code work asynchronously
-  void _controlVehicle() async{
-    if(_loopActive) return;
+// Method to loop while the button is pressed and change the state
+  void _controlVehicle() async {
+    // async to have code work asynchronously
+    if (_loopActive) return;
     _loopActive = true;
     while (_buttonPressed) {
       setState(() {
-        _changeMotorValue();
+        _changeMotorValue(); // Change the motor value while the button is pressed
       });
-            await Future.delayed(Duration(milliseconds: 1));
-
+      await Future.delayed(
+          Duration(milliseconds: 1)); // If no delay, this will endlessly loop
     }
-  _loopActive = false;
+    _loopActive = false;
   }
 
 // Following code sourced from : https://stackoverflow.com/questions/52128572/flutter-execute-method-so-long-the-button-pressed
   @override
   Widget build(BuildContext context) {
     return Wrap(
-
+      // Wrap fixed infinite pixel error
       children: <Widget>[
         Listener(
+          // Listener to listen for button interaction
           onPointerDown: (details) {
             _buttonPressed = true;
-            _controlVehicle();
-            },
+            _controlVehicle(); // Changes the state when button is pressed
+          },
           onPointerUp: (details) {
             _buttonPressed = false;
-            stop();
+            stop(); // Will stop motor value change
           },
-
           child: Container(
-            decoration: BoxDecoration(color: Colors.deepPurple, border: Border.all()),
-            padding: EdgeInsets.all(16.0),
-            child: Text(_instruction)),
-
+              // Creates the buttons
+              decoration:
+                  BoxDecoration(color: Colors.deepPurple, border: Border.all()),
+              padding: EdgeInsets.all(25.0),
+              child: Text(_instruction)),
         )
       ],
     );
   }
 
-  void _changeMotorValue() {
+  void _changeMotorValue() {  // Method to change the motor value
     print(_instruction);
   }
-    void stop() {
-    print("stop " );
+
+  void stop() { // Method to stop motor values.
+    print("stop ");
   }
 }
