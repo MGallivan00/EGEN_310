@@ -53,6 +53,8 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
+    UserInterface _leftButton;
+    UserInterface _rightButton;
     return Scaffold(
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
@@ -65,12 +67,14 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            UserInterface(MainAxisAlignment.center, CrossAxisAlignment.end,
+            _leftButton = UserInterface(MainAxisAlignment.center, CrossAxisAlignment.end,
                 "Turn Left", "turn Left"),
-            UserInterface(MainAxisAlignment.center, CrossAxisAlignment.end,
+            _rightButton = UserInterface(MainAxisAlignment.center, CrossAxisAlignment.end,
                 "Turn Right", "turn Right"),
 
+
           ]),
+
       // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
