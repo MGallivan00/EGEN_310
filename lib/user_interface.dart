@@ -24,30 +24,28 @@ class UserInterface extends StatelessWidget {
 //          splashColor: Colors.deepPurple,
 //          tooltip: 'Controls the vehicle',
 //          onPressed: () {
-//            buttonAction();
-//          },
+//            _buttonPressed = true;
+//            while(_buttonPressed) {
+//              buttonAction();
+//            }
+//            }
+
 
 //          child: Text(_buttonName),
 //        ),
-        // Source for listener: https://stackoverflow.com/questions/52128572/flutter-execute-method-so-long-the-button-pressed
-        GestureDetector(
-          child: IconButton(
-            icon: Icon(_button),
-            iconSize: 150.0,
-            splashColor: Colors.deepPurple,
-            tooltip: 'Controls the vehicle',
-            onPressed: () {
-             buttonAction();
-            },
-          ),
+      FloatingActionButton(
+        onPressed: buttonAction,
+        child:
+          Icon(_button)
+      )
 
-        ),
       ],
     );
   }
 
-  buttonAction() {
+  void buttonAction() {
     print(_instruction);
     print("-----------");
+    _buttonPressed = false;
   }
 }
