@@ -66,14 +66,14 @@ class _UserInterfaceState extends State<UserInterface> {
           },
           child: Container(
             // Creates the buttons
-            decoration:
-                BoxDecoration(color: Colors.deepPurple, border: Border.all()),
-            padding: EdgeInsets.all(25.0),
-//              child: Text(_instruction)),
-            child: Icon( // Adds Arrow Icon to button
+            decoration: BoxDecoration(color: Colors.deepPurple),
+            padding: EdgeInsets.all(5.0),
+            margin: EdgeInsets.all(10.0),
+            child: Icon(
+              // Adds Arrow Icon to button
               _icon,
               color: Colors.black87,
-              size: 50.0,
+              size: 100.0,
             ),
           ),
         )
