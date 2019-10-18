@@ -56,29 +56,58 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     UserInterface _leftButton;
     UserInterface _rightButton;
+        UserInterface _forwardButton;
+    UserInterface _backwardButton;
+
     return Scaffold(
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
         centerTitle: true,
-
       ),
       // Following code help with source : https://www.youtube.com/watch?v=pTJJsmejUOQ
       body: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            //TODO Thread?
-            _leftButton = UserInterface(MainAxisAlignment.center, // Create the left button
-                CrossAxisAlignment.end, "turn Left", Icons.keyboard_arrow_left),
-            Text('Turn'),
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          //TODO Thread?
+          _leftButton = UserInterface(
+              MainAxisAlignment.center, // Create the left button
+              CrossAxisAlignment.end,
+              "turn Left",
+              Icons.keyboard_arrow_left),
+          Text('Turn'),
 
-            _rightButton = UserInterface(MainAxisAlignment.center, // Create the turn right button
-                CrossAxisAlignment.end, "turn Right", Icons.keyboard_arrow_right),
-          ]),
+          _rightButton = UserInterface(
+              MainAxisAlignment.center, // Create the turn right button
+              CrossAxisAlignment.end,
+              "turn Right",
+              Icons.keyboard_arrow_right),
 
-      // This trailing comma makes auto-formatting nicer for build methods.
+          Column( // Column for forward / Backward movement
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                //TODO Thread?
+                _forwardButton = UserInterface( // Create the forward button
+                    MainAxisAlignment.center,
+                    CrossAxisAlignment.end,
+                    "Move Forward",
+                    Icons.keyboard_arrow_up),
+                Text('Forward / Backward'),
+
+                _backwardButton = UserInterface(// Create the turn backward button
+
+                    MainAxisAlignment.center,
+                    CrossAxisAlignment.end,
+                    "Move Backward",
+                    Icons.keyboard_arrow_down),
+              ]),
+
+          // This trailing comma makes auto-formatting nicer for build methods.
+        ],
+      ),
     );
   }
 }

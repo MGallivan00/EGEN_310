@@ -74,7 +74,7 @@ class _UserInterfaceState extends State<UserInterface> {
               // Adds Arrow Icon to button
               _icon,
               color: Colors.black87,
-              size: 100.0,
+              size: 90.0,
             ),
           ),
         )
