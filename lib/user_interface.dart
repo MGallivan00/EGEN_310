@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class UserInterface extends StatelessWidget{
   String _text;
 
-  UserInterface(this._text);
+  UserInterface(this._text); // Constructor
   @override
   Widget build(BuildContext context){
     return Container(

@@ -22,7 +22,6 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.deepPurple,
       ),
       home: MyHomePage(title: 'EGEN 310'),
-
     );
   }
 }
@@ -46,8 +45,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
-
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -65,12 +62,13 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       // Following code help with source : https://www.youtube.com/watch?v=pTJJsmejUOQ
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children:[
-        UserInterface('User Interface'),
-      ]),
-     // This trailing comma makes auto-formatting nicer for build methods.
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            UserInterface('User Interface'),
+            UserInterface('User Interface 2'),
+          ]),
+      // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
