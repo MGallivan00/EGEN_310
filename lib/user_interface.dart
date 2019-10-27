@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'dart:io';
-import 'dart:convert';
-import 'package:easy_udp/easy_udp.dart';
 
 // Following code help with source: https://www.youtube.com/watch?v=pTJJsmejUOQ
 class UserInterface extends StatefulWidget {
