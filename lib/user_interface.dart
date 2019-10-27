@@ -30,43 +30,35 @@ class _UserInterfaceState extends State<UserInterface> {
   String _instruction;
   bool _loopActive = false;
   IconData _icon;
-
+  String _ipAddress = '192.168.1.145';
+  int _port = 5005;
   _UserInterfaceState(this._mainAxisAlignment, this._crossAxisAlignment,
       this._instruction, this._icon); // Constructor
 
 // Method to loop while the button is pressed and change the state
   void _controlVehicle(instruction) async {
     // async to have code work asynchronously
+    // Following code sourced from : https://stackoverflow.com/questions/52128572/flutter-execute-method-so-long-the-button-pressed, user: boformer
     if (_loopActive) return;
     _loopActive = true;
     while (_buttonPressed) {
+      // loops while controls are being pressed.
       setState(() {
-        _changeMotorValue(); // Change the motor value while the button is pressed
-        // Source for sending packets over RawDataGram socket source: http://www.jamesslocum.com/post/77759061182
-        RawDatagramSocket.bind(InternetAddress.anyIPv4, 5005)
-            .then((RawDatagramSocket socket) {
-          int port = 5005;
-          socket.send(instruction.codeUnits,
-              new InternetAddress('192.168.1.145'), port);
-        });
-
-        // Socket.connect(InternetAddress.ANY_IP_V4, 5005).then((socket) {
-        //   print('Connected to: '
-        //       '${socket.remoteAddress.address}:${socket.remotePort}');
-        //   // Code to encode to base64 source https://stackoverflow.com/questions/15957427/how-do-i-encode-a-dart-string-in-base64, user: Ben
-        //   instruction = utf8.encode(instruction);
-        //   instruction = base64.encode(instruction);
-        //   socket.write(instruction);
-        // });
+        _moveCar(instruction); // Moves the car for the button that is pressed
       });
       await Future.delayed(
           Duration(microseconds: 1)); // If no delay, this will endlessly loop
     }
-
+    if (_instruction == 'forward' || _instruction == 'backward') {
+      // Stops car motors
+      _moveCar('stop forward/backward');
+    } else {
+      _moveCar('stop turn');
+    }
     _loopActive = false;
   }
 
-// Following code sourced from : https://stackoverflow.com/questions/52128572/flutter-execute-method-so-long-the-button-pressed
+  // Following code sourced from : https://stackoverflow.com/questions/52128572/flutter-execute-method-so-long-the-button-pressed, user: boformer
   @override
   Widget build(BuildContext context) {
     return Wrap(
@@ -81,7 +73,6 @@ class _UserInterfaceState extends State<UserInterface> {
           },
           onPointerUp: (details) {
             _buttonPressed = false;
-            stop(); // Will stop motor value change
           },
           child: Container(
             // Creates the buttons
@@ -102,13 +93,14 @@ class _UserInterfaceState extends State<UserInterface> {
     );
   }
 
-  void _changeMotorValue() {
-    // Method to change the motor value
-    print(_instruction);
-  }
-
-  void stop() {
-    // Method to stop motor values.
-    print("stop ");
+  void _moveCar(instruction) {
+    // Send instruction to raspberry pi
+    // Source for sending data packets with datagrams over dart: http://www.jamesslocum.com/post/77759061182
+    RawDatagramSocket.bind(InternetAddress.anyIPv4,
+            _port) // Binds the pi address and port for communication
+        .then((RawDatagramSocket socket) {
+      socket.send(instruction.codeUnits, new InternetAddress(_ipAddress),
+          _port); // Send the instruction to the pi
+    });
   }
 }
