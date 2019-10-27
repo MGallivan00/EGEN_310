@@ -17,6 +17,8 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  easy_udp: ^1.2.0
+
   flutter:
     sdk: flutter
 

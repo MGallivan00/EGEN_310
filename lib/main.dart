@@ -1,7 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'user_interface.dart';
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -65,6 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
         centerTitle: true,
+
       ),
       // Following code help with source : https://www.youtube.com/watch?v=pTJJsmejUOQ
       body: Row(
@@ -75,14 +77,14 @@ class _MyHomePageState extends State<MyHomePage> {
           _leftButton = UserInterface(
               MainAxisAlignment.center, // Create the left button
               CrossAxisAlignment.end,
-              "turn Left",
+              "left",
               Icons.keyboard_arrow_left),
           Text('Turn'),
 
           _rightButton = UserInterface(
               MainAxisAlignment.center, // Create the turn right button
               CrossAxisAlignment.end,
-              "turn Right",
+              "right",
               Icons.keyboard_arrow_right),
 
           Column( // Column for forward / Backward movement
@@ -92,15 +94,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 _forwardButton = UserInterface( // Create the forward button
                     MainAxisAlignment.center,
                     CrossAxisAlignment.end,
-                    "Move Forward",
+                    "forward",
                     Icons.keyboard_arrow_up),
-                Text('Forward / Backward'),
+                Text('Forw / Back'),
 
                 _backwardButton = UserInterface(// Create the turn backward button
 
                     MainAxisAlignment.center,
                     CrossAxisAlignment.end,
-                    "Move Backward",
+                    "backward",
                     Icons.keyboard_arrow_down),
               ]),
 
@@ -109,4 +111,9 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
-}
+
+
+  }
+
+
+
