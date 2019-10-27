@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"name": "EGEN_PI_1:~",
+			"uri": "ponyssh:/EGEN_PI_1/~"
+		}
+	],
+	"settings": {}
+}
