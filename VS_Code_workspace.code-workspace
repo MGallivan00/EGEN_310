@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"name": "EGEN_PI_1:~",
+			"uri": "ponyssh:/EGEN_PI_1/~"
+		},
+		{
+			"name": "EGEN_PI_MSU:/egengroup7",
+			"uri": "ponyssh:/EGEN_PI_MSU/egengroup7"
+		},
+		{
+			"name": "EGEN_PI_MSU:~",
+			"uri": "ponyssh:/EGEN_PI_MSU/~"
+		}
+	],
+	"settings": {}
+}
