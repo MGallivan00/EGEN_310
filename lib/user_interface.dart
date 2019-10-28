@@ -29,7 +29,7 @@ class _UserInterfaceState extends State<UserInterface> {
   bool _loopActive = false;
   IconData _icon;
   String _ipAddress = '192.168.1.145';
-  int _port = 5005;
+  int _port = 37110;
   _UserInterfaceState(this._mainAxisAlignment, this._crossAxisAlignment,
       this._instruction, this._icon); // Constructor
 
