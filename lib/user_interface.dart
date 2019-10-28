@@ -1,3 +1,5 @@
+import 'dart:isolate';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'dart:io';
@@ -33,7 +35,7 @@ class _UserInterfaceState extends State<UserInterface> {
   _UserInterfaceState(this._mainAxisAlignment, this._crossAxisAlignment,
       this._instruction, this._icon); // Constructor
   // var _socket=_verifyConnection();
-// Method to loop while the button is pressed and change the state
+  // Method to loop while the button is pressed and change the state
   void _controlVehicle(instruction) async {
     // async to have code work asynchronously
     // Following code sourced from : https://stackoverflow.com/questions/52128572/flutter-execute-method-so-long-the-button-pressed, user: boformer
@@ -95,26 +97,10 @@ class _UserInterfaceState extends State<UserInterface> {
     // Send instruction to raspberry pi
     // Source for sending data packets with datagrams over dart: http://www.jamesslocum.com/post/77759061182
     RawDatagramSocket.bind(InternetAddress.anyIPv4,
-            37110) // Binds the pi address and port for communication
+            _port) // Binds the pi address and port for communication
         .then((RawDatagramSocket socket) {
-
       socket.send(instruction.codeUnits, new InternetAddress(_ipAddress),
-          37110); // Send the instruction to the pi
+          _port); // Send the instruction to the pi
     });
   }
-
-  // RawDatagramSocket _verifyConnection() {
-  //   RawDatagramSocket newSocket;
-  //   // Send instruction to raspberry pi
-  //   // Source for sending data packets with datagrams over dart: http://www.jamesslocum.com/post/77759061182
-  //   RawDatagramSocket.bind(InternetAddress.anyIPv4,
-  //           _port) // Binds the pi address and port for communication
-  //       .then((RawDatagramSocket socket) {
-  //         newSocket = socket;
-  //     socket.send('egen_group_7_AH_MG_LC_RR'.codeUnits, new InternetAddress(_ipAddress),
-  //         _port); // Send the instruction to the pi
-  //     return socket;
-  //   });
-  //   return null;
-  // }
 }
