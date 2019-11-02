@@ -1,4 +1,5 @@
 import 'dart:isolate';
+import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -30,8 +31,8 @@ class _UserInterfaceState extends State<UserInterface> {
   String _instruction;
   bool _loopActive = false;
   IconData _icon;
-  String _ipAddress = '192.168.1.145';
-  int _port = 37110;
+  String _bluetoothAddress = 'B8:27:EB:9B:0D:DF';
+  int _port = 7;
   _UserInterfaceState(this._mainAxisAlignment, this._crossAxisAlignment,
       this._instruction, this._icon); // Constructor
   // var _socket=_verifyConnection();
@@ -93,14 +94,24 @@ class _UserInterfaceState extends State<UserInterface> {
     );
   }
 
-  void _moveCar(instruction) {
+  void _moveCar(instruction) async {
     // Send instruction to raspberry pi
     // Source for sending data packets with datagrams over dart: http://www.jamesslocum.com/post/77759061182
-    RawDatagramSocket.bind(InternetAddress.anyIPv4,
-            _port) // Binds the pi address and port for communication
-        .then((RawDatagramSocket socket) {
-      socket.send(instruction.codeUnits, new InternetAddress(_ipAddress),
-          _port); // Send the instruction to the pi
-    });
-  }
-}
+    // try
+    // RawDatagramSocket.bind(InternetAddress.anyIPv4,
+    //         _port) // Binds the pi address and port for communication
+    //     .then((RawDatagramSocket socket) {
+    //   socket.send(instruction.codeUnits, new InternetAddress(_ipAddress),
+    //       _port); // Send the instruction to the pi
+    // });
+
+    try{
+      BluetoothConnection _btConnection = await BluetoothConnection.toAddress(_bluetoothAddress);
+      print('Connected by bluetooth');
+      _btConnection.output.add(instruction);
+      }
+      catch(exception){
+        print('Cant connect to bluetooth');}
+      }
+    }
+

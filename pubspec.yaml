@@ -17,6 +17,7 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  flutter_bluetooth_serial: ^0.2.2
   easy_udp: ^1.2.0
 
   flutter:
