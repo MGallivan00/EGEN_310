@@ -1,9 +1,6 @@
-import 'dart:isolate';
-import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'bluetooth_interface.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'dart:io';
 
 // Following code help with source: https://www.youtube.com/watch?v=pTJJsmejUOQ
 class UserInterface extends StatefulWidget {
@@ -37,7 +34,6 @@ class _UserInterfaceState extends State<UserInterface> {
   bool _loopActive = false;
   IconData _icon;
   BluetoothInterface _device;
-  int _port = 7;
   _UserInterfaceState(this._mainAxisAlignment, this._crossAxisAlignment,
       this._instruction, this._icon, this._device); // Constructor
   // var _socket=_verifyConnection();
@@ -53,7 +49,7 @@ class _UserInterfaceState extends State<UserInterface> {
         _moveCar(instruction); // Moves the car for the button that is pressed
       });
       await Future.delayed(
-          Duration(microseconds: 1)); // If no delay, this will endlessly loop
+          Duration(milliseconds: 15)); // If no delay, this will endlessly loop
     }
     if (_instruction == 'forward' || _instruction == 'backward') {
       // Stops car motors

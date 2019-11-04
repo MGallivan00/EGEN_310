@@ -1,9 +1,4 @@
-import 'dart:ffi';
-import 'dart:io';
 import 'dart:convert';
-import 'dart:typed_data';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_blue/flutter_blue.dart';
 
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 

@@ -55,10 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    UserInterface _leftButton;
-    UserInterface _rightButton;
-    UserInterface _forwardButton;
-    UserInterface _backwardButton;
+
     BluetoothInterface _bluetoothDevice = new BluetoothInterface();
     _bluetoothDevice.connect();
     return Scaffold(
@@ -73,16 +70,14 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          //TODO Thread?
-          _leftButton = UserInterface(
+          UserInterface(
               MainAxisAlignment.center, // Create the left button
               CrossAxisAlignment.end,
               "left",
               Icons.keyboard_arrow_left,
               _bluetoothDevice),
           Text('Turn'),
-
-          _rightButton = UserInterface(
+          UserInterface(
               MainAxisAlignment.center, // Create the turn right button
               CrossAxisAlignment.end,
               "right",
@@ -93,8 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
               // Column for forward / Backward movement
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                //TODO Thread?
-                _forwardButton = UserInterface(
+                UserInterface(
                     // Create the forward button
                     MainAxisAlignment.center,
                     CrossAxisAlignment.end,
@@ -102,8 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     Icons.keyboard_arrow_up,
                     _bluetoothDevice),
                 Text('Forw / Back'),
-
-                _backwardButton = UserInterface(
+                UserInterface(
                     // Create the turn backward button
 
                     MainAxisAlignment.center,
