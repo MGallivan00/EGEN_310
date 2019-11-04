@@ -7,8 +7,7 @@ class BluetoothInterface {
   Future<BluetoothConnection> _device;
 
   void connect() {
-    _device = BluetoothConnection.toAddress(
-        'B8:27:EB:9B:0D:DF'); // Connect to the bluetooth device
+    _device = BluetoothConnection.toAddress('B8:27:EB:9B:0D:DF');
   }
 
   void writeOut(message) {
@@ -20,6 +19,8 @@ class BluetoothInterface {
         message = encoder
             .convert(message); // Encode the instruction message to UTF8 list
         connection.output.add(message); // Send the message
+      } else {
+        connect();
       }
     });
   }
