@@ -1,6 +1,6 @@
 import 'dart:isolate';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
-
+import 'bluetooth_interface.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'dart:io';
@@ -11,16 +11,21 @@ class UserInterface extends StatefulWidget {
   CrossAxisAlignment _crossAxisAlignment;
   String _instruction;
   IconData _icon;
-
-  UserInterface(this._mainAxisAlignment, this._crossAxisAlignment,
-      this._instruction, this._icon); // Constructor for UserInterface
+  BluetoothInterface _device;
+  UserInterface(
+      this._mainAxisAlignment,
+      this._crossAxisAlignment,
+      this._instruction,
+      this._icon,
+      this._device); // Constructor for UserInterface
 
   @override
   _UserInterfaceState createState() => _UserInterfaceState(
       this._mainAxisAlignment,
       this._crossAxisAlignment,
       this._instruction,
-      this._icon); // Create instance of _UserInterfaceState
+      this._icon,
+      this._device); // Create instance of _UserInterfaceState
 }
 
 // Following code sourced from : https://stackoverflow.com/questions/52128572/flutter-execute-method-so-long-the-button-pressed
@@ -31,10 +36,10 @@ class _UserInterfaceState extends State<UserInterface> {
   String _instruction;
   bool _loopActive = false;
   IconData _icon;
-  String _bluetoothAddress = 'B8:27:EB:9B:0D:DF';
+  BluetoothInterface _device;
   int _port = 7;
   _UserInterfaceState(this._mainAxisAlignment, this._crossAxisAlignment,
-      this._instruction, this._icon); // Constructor
+      this._instruction, this._icon, this._device); // Constructor
   // var _socket=_verifyConnection();
   // Method to loop while the button is pressed and change the state
   void _controlVehicle(instruction) async {
@@ -95,23 +100,6 @@ class _UserInterfaceState extends State<UserInterface> {
   }
 
   void _moveCar(instruction) async {
-    // Send instruction to raspberry pi
-    // Source for sending data packets with datagrams over dart: http://www.jamesslocum.com/post/77759061182
-    // try
-    // RawDatagramSocket.bind(InternetAddress.anyIPv4,
-    //         _port) // Binds the pi address and port for communication
-    //     .then((RawDatagramSocket socket) {
-    //   socket.send(instruction.codeUnits, new InternetAddress(_ipAddress),
-    //       _port); // Send the instruction to the pi
-    // });
-
-    try{
-      BluetoothConnection _btConnection = await BluetoothConnection.toAddress(_bluetoothAddress);
-      print('Connected by bluetooth');
-      _btConnection.output.add(instruction);
-      }
-      catch(exception){
-        print('Cant connect to bluetooth');}
-      }
-    }
-
+    _device.writeOut(instruction);
+  }
+}
