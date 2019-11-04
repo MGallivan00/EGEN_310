@@ -96,6 +96,10 @@ class _UserInterfaceState extends State<UserInterface> {
   }
 
   void _moveCar(instruction) async {
-    _device.writeOut(instruction);
+    try {
+      _device.writeOut(instruction);
+    } catch (exception) {
+      print('Bluetooth Not Connected.');
+    }
   }
 }
