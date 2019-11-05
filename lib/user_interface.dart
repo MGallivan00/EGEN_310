@@ -49,7 +49,7 @@ class _UserInterfaceState extends State<UserInterface> {
         _moveCar(instruction); // Moves the car for the button that is pressed
       });
       await Future.delayed(
-          Duration(milliseconds: 15)); // If no delay, this will endlessly loop
+          Duration(milliseconds: 50)); // If no delay, this will endlessly loop
     }
     if (_instruction == 'forward' || _instruction == 'backward') {
       // Stops car motors

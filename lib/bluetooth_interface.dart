@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 
 class BluetoothInterface {
@@ -10,7 +9,7 @@ class BluetoothInterface {
     _device = BluetoothConnection.toAddress('B8:27:EB:9B:0D:DF');
   }
 
-  void writeOut(message) {
+  Future<void> writeOut(message) async {
     // Write out to the raspberry pi
     _device.then((connection) {
       if (connection.isConnected) {
@@ -20,7 +19,7 @@ class BluetoothInterface {
             .convert(message); // Encode the instruction message to UTF8 list
         connection.output.add(message); // Send the message
       } else {
-        connect();
+        _device = BluetoothConnection.toAddress('B8:27:EB:9B:0D:DF');
       }
     });
   }
