@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'user_interface.dart';
 import 'bluetooth_interface.dart';
+import 'camera.dart';
+
 
 void main() => runApp(MyApp());
 
@@ -106,9 +108,20 @@ class _MyHomePageState extends State<MyHomePage> {
                     _bluetoothDevice),
               ]),
 
-          // This trailing comma makes auto-formatting nicer for build methods.
+//sourced with help from: https://proandroiddev.com/flutter-creating-multi-page-application-with-navigation-ef9f4a72d181
+          new Checkbox(
+              value: false,
+              onChanged: (bool newValue) {
+                Navigator.push(
+                  context,
+                  new MaterialPageRoute(builder: (context) => new Camera()),
+                );
+              }
+          )
+          // This trailing comma makes auto-formatting nicer for build methods
         ],
       ),
     );
   }
+
 }
