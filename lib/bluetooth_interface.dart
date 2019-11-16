@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 class BluetoothInterface {
   BluetoothInterface();
@@ -9,9 +10,10 @@ class BluetoothInterface {
     // _device = BluetoothConnection.toAddress('B8:27:EB:9B:0D:DF');
     try{
   _device = await BluetoothConnection.toAddress('B8:27:EB:9B:0D:DF');
+
     }
     catch(e){
-      print('Can connect to bluetooth');
+      print('Can not connect to bluetooth');
     }
   }
 
@@ -38,11 +40,18 @@ class BluetoothInterface {
         // });
         }
         catch (e)
-      { }
-    if(!_device.isConnected){
-      // _device.close();
-      print('Reconnecting');
-      connect();
-    }
+      { 
+        // _device.close();        
+        connect();
+        sleep(Duration(seconds: 1));
+        }
+      // try{
+      // if (!_device.isConnected){
+      //   // _device.finish();
+      //   connect();
+      //   sleep(Duration(milliseconds: 50));
+      // }}
+      // catch(e){}
+
   }
 }
