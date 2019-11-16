@@ -1,3 +1,5 @@
+import 'package:first_test/time_move.dart';
+
 import 'bluetooth_interface.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -9,12 +11,13 @@ class UserInterface extends StatefulWidget {
   String _instruction;
   IconData _icon;
   BluetoothInterface _device;
+  TimerMove _timer;
   UserInterface(
       this._mainAxisAlignment,
       this._crossAxisAlignment,
       this._instruction,
       this._icon,
-      this._device); // Constructor for UserInterface
+      this._device, this._timer); // Constructor for UserInterface
 
   @override
   _UserInterfaceState createState() => _UserInterfaceState(
@@ -22,7 +25,7 @@ class UserInterface extends StatefulWidget {
       this._crossAxisAlignment,
       this._instruction,
       this._icon,
-      this._device); // Create instance of _UserInterfaceState
+      this._device, this._timer); // Create instance of _UserInterfaceState
 }
 
 // Following code sourced from : https://stackoverflow.com/questions/52128572/flutter-execute-method-so-long-the-button-pressed
@@ -34,8 +37,9 @@ class _UserInterfaceState extends State<UserInterface> {
   bool _loopActive = false;
   IconData _icon;
   BluetoothInterface _device;
+  TimerMove _timer;
   _UserInterfaceState(this._mainAxisAlignment, this._crossAxisAlignment,
-      this._instruction, this._icon, this._device); // Constructor
+      this._instruction, this._icon, this._device, this._timer); // Constructor
   // var _socket=_verifyConnection();
   // Method to loop while the button is pressed and change the state
   void _controlVehicle(instruction) async {
@@ -45,9 +49,10 @@ class _UserInterfaceState extends State<UserInterface> {
     _loopActive = true;
     while (_buttonPressed) {
       // loops while controls are being pressed.
+      if (_timer.moveAllowed()){
       setState(() {
         _moveCar(instruction); // Moves the car for the button that is pressed
-      });
+      });}
       await Future.delayed(
           Duration(milliseconds: 50)); // If no delay, this will endlessly loop
     }

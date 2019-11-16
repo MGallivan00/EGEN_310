@@ -1,3 +1,4 @@
+import 'package:first_test/time_move.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'user_interface.dart';
@@ -58,6 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     BluetoothInterface _bluetoothDevice = new BluetoothInterface();
     _bluetoothDevice.connect();
+    TimerMove _timer = new TimerMove();
     return Scaffold(
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
@@ -75,14 +77,14 @@ class _MyHomePageState extends State<MyHomePage> {
               CrossAxisAlignment.end,
               "left",
               Icons.keyboard_arrow_left,
-              _bluetoothDevice),
+              _bluetoothDevice, _timer),
           Text('Turn'),
           UserInterface(
               MainAxisAlignment.center, // Create the turn right button
               CrossAxisAlignment.end,
               "right",
               Icons.keyboard_arrow_right,
-              _bluetoothDevice),
+              _bluetoothDevice, _timer),
 
           Column(
               // Column for forward / Backward movement
@@ -94,7 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     CrossAxisAlignment.end,
                     "forward",
                     Icons.keyboard_arrow_up,
-                    _bluetoothDevice),
+                    _bluetoothDevice, _timer),
                 Text('Forw / Back'),
                 UserInterface(
                     // Create the turn backward button
@@ -103,7 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     CrossAxisAlignment.end,
                     "backward",
                     Icons.keyboard_arrow_down,
-                    _bluetoothDevice),
+                    _bluetoothDevice, _timer),
               ]),
 
           // This trailing comma makes auto-formatting nicer for build methods.
