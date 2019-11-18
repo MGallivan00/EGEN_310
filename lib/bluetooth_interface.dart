@@ -30,6 +30,7 @@ class BluetoothInterface {
     //     _device = BluetoothConnection.toAddress('B8:27:EB:9B:0D:DF');
     //   }
     // });
+    if (_device.isConnected){
         try{
         Utf8Encoder encoder = Utf8Encoder();
         message = encoder.convert(message); // Encode the instruction message to UTF8 list
@@ -40,10 +41,16 @@ class BluetoothInterface {
         // });
         }
         catch (e)
-      { _device.close();        
+      { _device.close();
+      _device.finish();        
         connect();
-        sleep(Duration(seconds: 1));
-        }
+        sleep(Duration(milliseconds: 500));
+        }}
+        else{
+          _device.close();
+      _device.finish();       
+        connect();
+        sleep(Duration(milliseconds: 500));        }
       // try{
       // if (!_device.isConnected){
       //   // _device.finish();
