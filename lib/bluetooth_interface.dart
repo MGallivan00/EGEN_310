@@ -13,7 +13,7 @@ class BluetoothInterface {
 
     }
     catch(e){
-      print('Can not connect to bluetooth');
+      print('Cant connect to bluetooth');
     }
   }
 
@@ -40,8 +40,7 @@ class BluetoothInterface {
         // });
         }
         catch (e)
-      { 
-        // _device.close();        
+      { _device.close();        
         connect();
         sleep(Duration(seconds: 1));
         }
