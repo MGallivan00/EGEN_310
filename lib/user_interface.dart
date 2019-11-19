@@ -31,7 +31,7 @@ class _UserInterfaceState extends State<UserInterface> {
   bool _loopActive = false;
   IconData _icon;
   String _ipAddress = '192.168.1.145';
-  int _port =58486;
+  int _port =36649;
   _UserInterfaceState(this._mainAxisAlignment, this._crossAxisAlignment,
       this._instruction, this._icon); // Constructor
   // var _socket=_verifyConnection();
