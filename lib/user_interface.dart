@@ -31,7 +31,7 @@ class _UserInterfaceState extends State<UserInterface> {
   bool _loopActive = false;
   IconData _icon;
   String _ipAddress = '192.168.1.145';
-  int _port =33884;
+  int _port =38049;
   _UserInterfaceState(this._mainAxisAlignment, this._crossAxisAlignment,
       this._instruction, this._icon); // Constructor
   // var _socket=_verifyConnection();
@@ -47,14 +47,18 @@ class _UserInterfaceState extends State<UserInterface> {
         _moveCar(instruction); // Moves the car for the button that is pressed
       });
       await Future.delayed(
-          Duration(microseconds: 1)); // If no delay, this will endlessly loop
+          Duration(microseconds: 250)); // If no delay, this will endlessly loop
     }
     if (_instruction == 'forward' || _instruction == 'backward') {
       // Stops car motors
+      int i = 0;
+      while(i<5){
       _moveCar('stop forward/backward');
-    } else {
-      _moveCar('stop turn');
-    }
+      i ++;
+    } }
+    // else {
+      // _moveCar('stop turn');
+    // }
     _loopActive = false;
   }
 
