@@ -1,6 +1,9 @@
+import 'package:first_test/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'user_interface.dart';
+import 'bluetooth_interface.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -53,65 +56,71 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    UserInterface _leftButton;
-    UserInterface _rightButton;
-        UserInterface _forwardButton;
-    UserInterface _backwardButton;
 
+    BluetoothInterface _bluetoothDevice = new BluetoothInterface();
+    _bluetoothDevice.connect();
+
+    //sourced from https://proandroiddev.com/flutter-creating-multi-page-application-with-navigation-ef9f4a72d181
     return Scaffold(
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
         centerTitle: true,
-
+        
       ),
       // Following code help with source : https://www.youtube.com/watch?v=pTJJsmejUOQ
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(context, new MaterialPageRoute(builder: (context) => new CameraApp()),
+          );
+        },
+        child: Icon(Icons.camera_alt),
+      ),
       body: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          //TODO Thread?
-          _leftButton = UserInterface(
+          UserInterface(
               MainAxisAlignment.center, // Create the left button
               CrossAxisAlignment.end,
               "left",
-              Icons.keyboard_arrow_left),
+              Icons.keyboard_arrow_left,
+              _bluetoothDevice),
           Text('Turn'),
-
-          _rightButton = UserInterface(
+          UserInterface(
               MainAxisAlignment.center, // Create the turn right button
               CrossAxisAlignment.end,
               "right",
-              Icons.keyboard_arrow_right),
+              Icons.keyboard_arrow_right,
+              _bluetoothDevice),
 
-          Column( // Column for forward / Backward movement
+          Column(
+            // Column for forward / Backward movement
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                //TODO Thread?
-                _forwardButton = UserInterface( // Create the forward button
+
+                UserInterface(
+                  // Create the forward button
                     MainAxisAlignment.center,
                     CrossAxisAlignment.end,
                     "forward",
-                    Icons.keyboard_arrow_up),
+                    Icons.keyboard_arrow_up,
+                    _bluetoothDevice),
                 Text('Forw / Back'),
-
-                _backwardButton = UserInterface(// Create the turn backward button
+                UserInterface(
+                  // Create the turn backward button
 
                     MainAxisAlignment.center,
                     CrossAxisAlignment.end,
                     "backward",
-                    Icons.keyboard_arrow_down),
+                    Icons.keyboard_arrow_down,
+                    _bluetoothDevice),
               ]),
-
           // This trailing comma makes auto-formatting nicer for build methods.
         ],
       ),
+
     );
   }
-
-
-  }
-
-
-
+}
