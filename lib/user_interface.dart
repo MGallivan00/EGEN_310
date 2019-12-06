@@ -1,6 +1,8 @@
-import 'bluetooth_interface.dart';
+import 'dart:isolate';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'dart:io';
 
 // Following code help with source: https://www.youtube.com/watch?v=pTJJsmejUOQ
 class UserInterface extends StatefulWidget {
@@ -8,21 +10,16 @@ class UserInterface extends StatefulWidget {
   CrossAxisAlignment _crossAxisAlignment;
   String _instruction;
   IconData _icon;
-  BluetoothInterface _device;
-  UserInterface(
-      this._mainAxisAlignment,
-      this._crossAxisAlignment,
-      this._instruction,
-      this._icon,
-      this._device); // Constructor for UserInterface
+
+  UserInterface(this._mainAxisAlignment, this._crossAxisAlignment,
+      this._instruction, this._icon); // Constructor for UserInterface
 
   @override
   _UserInterfaceState createState() => _UserInterfaceState(
       this._mainAxisAlignment,
       this._crossAxisAlignment,
       this._instruction,
-      this._icon,
-      this._device); // Create instance of _UserInterfaceState
+      this._icon); // Create instance of _UserInterfaceState
 }
 
 // Following code sourced from : https://stackoverflow.com/questions/52128572/flutter-execute-method-so-long-the-button-pressed
@@ -33,9 +30,10 @@ class _UserInterfaceState extends State<UserInterface> {
   String _instruction;
   bool _loopActive = false;
   IconData _icon;
-  BluetoothInterface _device;
+  String _ipAddress = '192.168.43.192';
+  int _port =38049;
   _UserInterfaceState(this._mainAxisAlignment, this._crossAxisAlignment,
-      this._instruction, this._icon, this._device); // Constructor
+      this._instruction, this._icon); // Constructor
   // var _socket=_verifyConnection();
   // Method to loop while the button is pressed and change the state
   void _controlVehicle(instruction) async {
@@ -49,14 +47,18 @@ class _UserInterfaceState extends State<UserInterface> {
         _moveCar(instruction); // Moves the car for the button that is pressed
       });
       await Future.delayed(
-          Duration(milliseconds: 50)); // If no delay, this will endlessly loop
+          Duration(microseconds: 250)); // If no delay, this will endlessly loop
     }
     if (_instruction == 'forward' || _instruction == 'backward') {
       // Stops car motors
+      int i = 0;
+      while(i<5){
       _moveCar('stop forward/backward');
-    } else {
-      _moveCar('stop turn');
-    }
+      i ++;
+    } }
+    // else {
+      // _moveCar('stop turn');
+    // }
     _loopActive = false;
   }
 
@@ -95,11 +97,14 @@ class _UserInterfaceState extends State<UserInterface> {
     );
   }
 
-  void _moveCar(instruction) async {
-    try {
-      _device.writeOut(instruction);
-    } catch (exception) {
-      print('Bluetooth Not Connected.');
-    }
+  void _moveCar(instruction) {
+    // Send instruction to raspberry pi
+    // Source for sending data packets with datagrams over dart: http://www.jamesslocum.com/post/77759061182
+    RawDatagramSocket.bind(InternetAddress.anyIPv4,
+            _port) // Binds the pi address and port for communication
+        .then((RawDatagramSocket socket) {
+      socket.send(instruction.codeUnits, new InternetAddress(_ipAddress),
+          _port); // Send the instruction to the pi
+    });
   }
 }
